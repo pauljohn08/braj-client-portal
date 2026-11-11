@@ -71,10 +71,6 @@ export function quoteIsSet(order: Order): boolean {
   return Number(order.amount ?? 0) > 0;
 }
 
-export function isEngaged(order: Order): boolean {
-  return order.status === "in_progress" || order.status === "completed";
-}
-
 /* -------------------------------------------------------------------------- */
 /* Milestones                                                                  */
 /* -------------------------------------------------------------------------- */
