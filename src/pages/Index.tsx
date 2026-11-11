@@ -68,7 +68,7 @@ const Index = () => {
       <Header />
 
       {/* Hero */}
-      <section className="relative py-12 sm:py-16 md:py-24 text-primary-foreground overflow-hidden">
+      <section className="relative py-16 sm:py-24 md:py-32 pb-20 overflow-hidden text-white">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
@@ -76,22 +76,27 @@ const Index = () => {
           }}
           aria-hidden
         />
-        <div className="absolute inset-0 bg-primary/50" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent" aria-hidden />
+        <div className="absolute -top-[18%] -right-[20%] w-[560px] h-[560px] rounded-full bg-primary/25 blur-[130px]" aria-hidden />
+        <div className="absolute -bottom-[10%] -left-[10%] w-[420px] h-[420px] rounded-full bg-white/15 blur-[100px]" aria-hidden />
         <div className="container relative z-10 px-4 text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
-            BRAJ Statistical &amp; Research Consultancy
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-3 py-1 text-[10px] font-semibold text-white uppercase tracking-[0.15em]">
+            BRAJ Statistical &amp; Research Consulting
+          </span>
+          <h1 className="mt-5 text-4xl sm:text-7xl font-extrabold tracking-tight text-balance mb-6 sm:leading-[1.12]">
+            Academic support that delivers results.
           </h1>
-          <p className="text-lg max-w-2xl mx-auto mb-8 opacity-90">
-            Professional statistical analysis, research assistance, and academic support services to help you succeed.
+          <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-10 text-white/90">
+            Professional statistical analysis, research assistance, plagiarism checking, paraphrasing, editing, and instrument validation to help you succeed.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Button size="lg" variant="secondary" asChild>
+            <Button size="lg" className="bg-white text-primary shadow-card hover:bg-white/90 transition-colors" asChild>
               <Link to={user ? (isAdmin ? "/admin" : isPartTimer ? "/parttimer" : "/dashboard") : "/auth?tab=signup"}>
                 Get Started <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             {!user && (
-              <Button size="lg" variant="outline" className="bg-primary-foreground/10 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/20" asChild>
+              <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20" asChild>
                 <Link to="/auth?tab=signup&parttimer=1">Become a Part-timer</Link>
               </Button>
             )}
@@ -105,9 +110,14 @@ const Index = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {SERVICES.map((service) => (
-              <Card key={service.id} className="flex flex-col">
-                <CardHeader>
-                  <div className="text-primary mb-2">{serviceIcons[service.id]}</div>
+              <Card
+                key={service.id}
+                className="flex flex-col h-full transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
+              >
+                <CardHeader className="pb-4">
+                  <div className="flex w-fit items-center justify-center rounded-full bg-primary/10 p-2 mb-2 transition-colors group-hover:bg-primary/20">
+                    {serviceIcons[service.id]}
+                  </div>
                   <CardTitle>{service.name}</CardTitle>
                   <CardDescription>{service.description}</CardDescription>
                 </CardHeader>
@@ -150,7 +160,7 @@ const Index = () => {
             <h2 className="text-3xl font-bold text-center mb-12">What Our Clients Say</h2>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {testimonials.map((t, i) => (
-                <Card key={i} className="flex flex-col">
+                <Card key={i} className="flex flex-col border-l-2 border-l-primary">
                   <CardContent className="pt-6 flex-1">
                     <Quote className="h-8 w-8 text-primary/50 mb-2" />
                     <p className="text-sm italic mb-4">"{t.testimony}"</p>
@@ -177,7 +187,9 @@ const Index = () => {
       <section className="py-16 border-t">
         <div className="container">
           <div className="max-w-2xl mx-auto text-center">
-            <Award className="h-12 w-12 text-primary mx-auto mb-4" />
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+              <Award className="h-9 w-9 text-primary" />
+            </div>
             <h2 className="text-2xl font-bold mb-2">Certificate of Business Name Registration</h2>
             <p className="text-muted-foreground mb-6">
               BRAJ Consultancy is a registered business. View our official certificate below.

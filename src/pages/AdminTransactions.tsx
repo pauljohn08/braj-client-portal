@@ -142,7 +142,9 @@ export default function AdminTransactions() {
           {transactions.length === 0 ? (
             <Card>
               <CardContent className="py-12 text-center text-muted-foreground">
-                No transactions yet. Transactions are created when you confirm payment on a completed order.
+                <Receipt className="h-10 w-10 mx-auto mb-3 opacity-40" />
+                <p>No transactions yet.</p>
+                <p className="text-xs mt-1">Transactions are created when you confirm payment on a completed order.</p>
               </CardContent>
             </Card>
           ) : (

@@ -23,13 +23,13 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Download, Loader2, Search, List, Clock, CheckCircle, FileCheck, Receipt, Star, UserPlus, Trash2 } from "lucide-react";
+import { Download, Loader2, Search, List, Clock, CheckCircle, FileCheck, Receipt, Star, UserPlus, Trash2, LayoutDashboard } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
 const statusColors: Record<string, string> = {
-  pending: "bg-yellow-100 text-yellow-800 border-yellow-200",
-  in_progress: "bg-blue-100 text-blue-800 border-blue-200",
-  completed: "bg-green-100 text-green-800 border-green-200",
+  pending: "bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-950 dark:text-yellow-300 dark:border-yellow-800",
+  in_progress: "bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800",
+  completed: "bg-green-100 text-green-800 border-green-200 dark:bg-green-950 dark:text-green-300 dark:border-green-800",
 };
 
 const statusLabels: Record<string, string> = {
@@ -420,8 +420,16 @@ export default function AdminDashboard() {
       <Header />
       <main className="flex-1 py-8">
         <div className="container">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                <LayoutDashboard className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+                <p className="text-sm text-muted-foreground">Manage orders, part-timers, and payments.</p>
+              </div>
+            </div>
             <Button variant="outline" size="sm" asChild>
               <Link to="/admin/transactions"><Receipt className="h-4 w-4 mr-1" /> Transaction History</Link>
             </Button>
@@ -576,7 +584,7 @@ export default function AdminDashboard() {
           </AlertDialog>
 
           {/* Order status tabs: All | Pending | In Progress | Completed */}
-          <div className="flex flex-wrap gap-2 p-1 rounded-lg bg-muted mb-6">
+          <div className="flex flex-wrap gap-2 p-1 rounded-xl bg-muted/60 mb-6">
             {[
               { value: "all" as const, label: "All", icon: List, count: orders.length },
               { value: "pending" as const, label: "Pending", icon: Clock, count: orders.filter((o) => o.status === "pending").length },
@@ -624,7 +632,8 @@ export default function AdminDashboard() {
           {filtered.length === 0 ? (
             <Card>
               <CardContent className="py-12 text-center text-muted-foreground">
-                No orders found.
+                <Search className="h-10 w-10 mx-auto mb-3 opacity-40" />
+                <p>No orders found.</p>
               </CardContent>
             </Card>
           ) : (

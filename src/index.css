@@ -2,88 +2,124 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ---------------------------------------------------------------------------
+   BRAJ design tokens
+
+   Every colour is HSL so it can be composed with opacity in Tailwind. The
+   palette is deliberately narrow: deep navy carries structure, a single
+   restrained blue is reserved for links, focus and active state, and the
+   canvas stays a soft grey so that white cards read as the foreground layer.
+--------------------------------------------------------------------------- */
 
 @layer base {
   :root {
-    --background: 210 33% 98%;
-    --foreground: 215 25% 15%;
+    /* Canvas */
+    --background: 210 20% 97.5%;
+    --foreground: 215 30% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 215 30% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 215 30% 15%;
 
-    --primary: 214 80% 45%;
-    --primary-foreground: 0 0% 100%;
+    /* Deep navy — the primary structural colour */
+    --primary: 215 60% 23%;
+    --primary-foreground: 210 40% 99%;
 
-    --secondary: 210 40% 94%;
-    --secondary-foreground: 215 25% 15%;
+    --secondary: 210 24% 94%;
+    --secondary-foreground: 215 35% 22%;
 
-    --muted: 210 30% 95%;
-    --muted-foreground: 215 15% 50%;
+    --muted: 210 24% 95%;
+    --muted-foreground: 215 16% 45%;
 
-    --accent: 214 80% 95%;
-    --accent-foreground: 214 80% 35%;
+    --accent: 214 56% 95%;
+    --accent-foreground: 215 55% 26%;
 
-    --destructive: 0 72% 51%;
+    /* The one restrained blue */
+    --brand: 214 76% 46%;
+    --brand-foreground: 0 0% 100%;
+    --brand-muted: 214 70% 96%;
+
+    --destructive: 0 66% 45%;
     --destructive-foreground: 0 0% 100%;
+    --destructive-muted: 0 70% 97%;
 
-    --border: 214 20% 88%;
-    --input: 214 20% 88%;
-    --ring: 214 80% 45%;
+    --success: 154 55% 27%;
+    --success-foreground: 0 0% 100%;
+    --success-muted: 152 44% 95%;
 
-    --radius: 0.5rem;
+    --warning: 28 78% 33%;
+    --warning-foreground: 0 0% 100%;
+    --warning-muted: 38 88% 95%;
 
-    --sidebar-background: 214 80% 20%;
-    --sidebar-foreground: 210 20% 95%;
-    --sidebar-primary: 0 0% 100%;
-    --sidebar-primary-foreground: 214 80% 20%;
-    --sidebar-accent: 214 60% 30%;
-    --sidebar-accent-foreground: 210 20% 95%;
-    --sidebar-border: 214 60% 30%;
-    --sidebar-ring: 214 80% 45%;
+    --border: 214 20% 89%;
+    --input: 214 20% 87%;
+    --ring: 214 76% 46%;
+
+    --radius: 0.75rem;
+
+    /* Navigation rail: navy, one step darker than the primary */
+    --sidebar-background: 215 55% 16%;
+    --sidebar-foreground: 210 25% 84%;
+    --sidebar-primary: 210 40% 98%;
+    --sidebar-primary-foreground: 215 55% 16%;
+    --sidebar-accent: 215 44% 24%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 215 38% 26%;
+    --sidebar-ring: 214 76% 58%;
   }
 
   .dark {
-    --background: 215 25% 10%;
-    --foreground: 210 20% 95%;
+    --background: 215 32% 9%;
+    --foreground: 210 25% 94%;
 
-    --card: 215 25% 13%;
-    --card-foreground: 210 20% 95%;
+    --card: 215 30% 12%;
+    --card-foreground: 210 25% 94%;
 
-    --popover: 215 25% 13%;
-    --popover-foreground: 210 20% 95%;
+    --popover: 215 30% 12%;
+    --popover-foreground: 210 25% 94%;
 
-    --primary: 214 80% 55%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 213 70% 72%;
+    --primary-foreground: 215 55% 12%;
 
-    --secondary: 215 20% 20%;
-    --secondary-foreground: 210 20% 95%;
+    --secondary: 215 22% 18%;
+    --secondary-foreground: 210 25% 94%;
 
-    --muted: 215 20% 20%;
-    --muted-foreground: 215 15% 60%;
+    --muted: 215 22% 18%;
+    --muted-foreground: 215 16% 64%;
 
-    --accent: 214 60% 25%;
-    --accent-foreground: 210 20% 95%;
+    --accent: 215 30% 20%;
+    --accent-foreground: 210 25% 94%;
 
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 210 20% 95%;
+    --brand: 213 80% 68%;
+    --brand-foreground: 215 55% 12%;
+    --brand-muted: 215 34% 20%;
 
-    --border: 215 20% 20%;
-    --input: 215 20% 20%;
-    --ring: 214 80% 55%;
-    --sidebar-background: 215 25% 8%;
-    --sidebar-foreground: 210 20% 95%;
-    --sidebar-primary: 214 80% 55%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 20% 15%;
-    --sidebar-accent-foreground: 210 20% 95%;
-    --sidebar-border: 215 20% 15%;
-    --sidebar-ring: 214 80% 55%;
+    --destructive: 0 60% 62%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-muted: 0 30% 20%;
+
+    --success: 152 48% 62%;
+    --success-foreground: 154 60% 10%;
+    --success-muted: 154 26% 19%;
+
+    --warning: 38 80% 66%;
+    --warning-foreground: 28 70% 12%;
+    --warning-muted: 30 30% 19%;
+
+    --border: 215 20% 22%;
+    --input: 215 20% 24%;
+    --ring: 213 80% 68%;
+
+    --sidebar-background: 215 38% 7%;
+    --sidebar-foreground: 210 20% 82%;
+    --sidebar-primary: 210 40% 98%;
+    --sidebar-primary-foreground: 215 38% 8%;
+    --sidebar-accent: 215 32% 15%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 215 28% 17%;
+    --sidebar-ring: 213 80% 68%;
   }
 }
 
@@ -92,7 +128,141 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    @apply antialiased;
+    -webkit-text-size-adjust: 100%;
+    font-family: "Source Sans 3", ui-sans-serif, system-ui, -apple-system,
+      "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-feature-settings: "kern" 1;
+  }
+
   body {
     @apply bg-background text-foreground;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Numerals are load-bearing on this site (amounts, word counts, dates), so
+     keep tabular figures available wherever columns need to line up. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: hsl(var(--brand) / 0.18);
+  }
+
+  /* A single, consistent focus treatment across every interactive element.
+     Radius is intentionally not set here — it would override the element's own
+     corner radius the moment it received focus. */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer base {
+  /* Radix menus and dialogs manage their own focus, so the outline would
+     double up with the component's own ring. */
+  [data-radix-popper-content-wrapper] :focus-visible,
+  [role="dialog"] :focus-visible,
+  [role="menu"] :focus-visible {
+    outline: none;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .font-display {
+    font-family: "Source Serif 4", ui-serif, Georgia, Cambria, "Times New Roman",
+      serif;
+    font-optical-sizing: auto;
+  }
+
+  /* Two shadow tokens only. Cards sit on the page; raised surfaces lift on
+     interaction. Nothing else in the interface casts a shadow. */
+  .shadow-card {
+    box-shadow:
+      0 1px 2px 0 hsl(215 45% 20% / 0.04),
+      0 1px 3px 0 hsl(215 45% 20% / 0.06);
+  }
+
+  .shadow-raised {
+    box-shadow:
+      0 6px 16px -4px hsl(215 45% 20% / 0.1),
+      0 2px 6px -2px hsl(215 45% 20% / 0.05);
+  }
+
+  .shadow-overlay {
+    box-shadow:
+      0 16px 40px -12px hsl(215 45% 20% / 0.22),
+      0 4px 12px -4px hsl(215 45% 20% / 0.08);
+  }
+
+  /* The one orchestrated entrance: page content rises once on mount. */
+  .animate-rise {
+    animation: rise 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-fade {
+    animation: fade 0.24s ease-out both;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Thin, unobtrusive scrollbars inside scroll regions. */
+  .scroll-slim {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  .scroll-slim::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scroll-slim::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
+  }
+
+  .scroll-slim::-webkit-scrollbar-track {
+    background: transparent;
   }
 }

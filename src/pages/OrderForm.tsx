@@ -13,7 +13,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { SERVICES } from "@/lib/services";
 import { toast } from "@/hooks/use-toast";
-import { Upload } from "lucide-react";
+import { Upload, FileText } from "lucide-react";
 
 export default function OrderForm() {
   const [searchParams] = useSearchParams();
@@ -197,9 +197,16 @@ export default function OrderForm() {
       <Header />
       <main className="flex-1 py-12">
         <div className="container max-w-lg">
-          <Card>
-            <CardHeader>
-              <CardTitle>Place an Order</CardTitle>
+          <Card className="shadow-card">
+            <CardHeader className="pb-4">
+              <div className="flex items-center gap-3 mb-1">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                  <FileText className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <CardTitle>Place an Order</CardTitle>
+                </div>
+              </div>
               <CardDescription>Fill out the form below to place your order.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">

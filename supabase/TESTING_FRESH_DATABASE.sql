@@ -269,7 +269,14 @@ CREATE POLICY "Users can view own roles" ON public.user_roles FOR SELECT TO auth
 CREATE POLICY "Admins can manage roles" ON public.user_roles FOR ALL TO authenticated USING (public.has_role(auth.uid(), 'admin'));
 
 CREATE POLICY "Clients see own orders" ON public.orders FOR SELECT TO authenticated
-  USING (user_id = auth.uid() OR public.has_role(auth.uid(), 'admin') OR public.has_role(auth.uid(), 'parttimer'));
+  USING (
+    user_id = auth.uid() OR
+    public.has_role(auth.uid(), 'admin') OR
+    (
+      public.has_role(auth.uid(), 'parttimer') AND
+      (assigned_to IS NULL OR assigned_to = auth.uid())
+    )
+  );
 CREATE POLICY "Anon read orders with testimonials" ON public.orders FOR SELECT TO anon
   USING (id IN (SELECT order_id FROM public.order_ratings WHERE testimony IS NOT NULL));
 CREATE POLICY "Clients create own orders" ON public.orders FOR INSERT TO authenticated WITH CHECK (user_id = auth.uid());
@@ -288,8 +295,14 @@ CREATE POLICY "Clients delete own pending orders" ON public.orders FOR DELETE TO
 CREATE POLICY "View order files" ON public.order_files FOR SELECT TO authenticated
   USING (
     public.has_role(auth.uid(), 'admin') OR
-    public.has_role(auth.uid(), 'parttimer') OR
-    order_id IN (SELECT id FROM public.orders WHERE user_id = auth.uid())
+    order_id IN (SELECT id FROM public.orders WHERE user_id = auth.uid()) OR
+    (
+      public.has_role(auth.uid(), 'parttimer') AND
+      order_id IN (
+        SELECT id FROM public.orders
+        WHERE assigned_to IS NULL OR assigned_to = auth.uid()
+      )
+    )
   );
 CREATE POLICY "Upload input files" ON public.order_files FOR INSERT TO authenticated
   WITH CHECK (
@@ -351,7 +364,13 @@ CREATE POLICY "Users view own input files" ON storage.objects FOR SELECT TO auth
     bucket_id = 'input-files' AND (
       auth.uid()::text = (storage.foldername(name))[1] OR
       public.has_role(auth.uid(), 'admin') OR
-      public.has_role(auth.uid(), 'parttimer')
+      (
+        public.has_role(auth.uid(), 'parttimer') AND
+        (storage.foldername(name))[2] IN (
+          SELECT id::text FROM public.orders
+          WHERE assigned_to IS NULL OR assigned_to = auth.uid()
+        )
+      )
     )
   );
 CREATE POLICY "Users delete own input files" ON storage.objects FOR DELETE TO authenticated
@@ -363,8 +382,13 @@ CREATE POLICY "View output files" ON storage.objects FOR SELECT TO authenticated
   USING (
     bucket_id = 'output-files' AND (
       public.has_role(auth.uid(), 'admin') OR
-      public.has_role(auth.uid(), 'parttimer') OR
-      auth.uid()::text = (storage.foldername(name))[1]
+      auth.uid()::text = (storage.foldername(name))[1] OR
+      (
+        public.has_role(auth.uid(), 'parttimer') AND
+        (storage.foldername(name))[2] IN (
+          SELECT id::text FROM public.orders WHERE assigned_to = auth.uid()
+        )
+      )
     )
   );
 CREATE POLICY "Admins delete output files" ON storage.objects FOR DELETE TO authenticated

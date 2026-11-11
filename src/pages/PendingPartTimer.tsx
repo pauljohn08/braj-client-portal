@@ -11,10 +11,10 @@ export default function PendingPartTimer() {
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
       <div className="flex flex-1 items-center justify-center py-12 px-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <div className="flex justify-center mb-2">
-              <Clock className="h-12 w-12 text-amber-500" />
+        <Card className="w-full max-w-md shadow-card">
+          <CardHeader className="text-center pt-8">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-amber-100">
+              <Clock className="h-9 w-9 text-amber-500" />
             </div>
             <CardTitle>Part-timer application pending</CardTitle>
             <CardDescription>

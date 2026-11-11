@@ -149,11 +149,19 @@ export default function PartTimerAccount() {
       <Header />
       <main className="flex-1 py-6 sm:py-8">
         <div className="container px-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                <User className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h1 className="text-xl sm:text-2xl font-bold">Account</h1>
+                <p className="text-sm text-muted-foreground">Manage your profile and view payment history.</p>
+              </div>
+            </div>
             <Button variant="ghost" size="sm" asChild className="w-full sm:w-auto">
               <Link to="/parttimer"><ArrowLeft className="h-4 w-4 mr-1" /> Back to Dashboard</Link>
             </Button>
-            <h1 className="text-xl sm:text-2xl font-bold">Account</h1>
           </div>
 
           {/* Account details */}
@@ -340,8 +348,10 @@ export default function PartTimerAccount() {
             <p className="text-sm text-muted-foreground mb-4">Your share from confirmed payments (admin pays you this amount).</p>
             {payments.length === 0 ? (
               <Card>
-                <CardContent className="py-8 text-center text-muted-foreground text-sm">
-                  No payments yet. Payments appear here after the admin confirms client payment for orders you completed.
+                <CardContent className="py-8 text-center text-muted-foreground">
+                  <Banknote className="h-10 w-10 mx-auto mb-3 opacity-40" />
+                  <p>No payments yet.</p>
+                  <p className="text-xs mt-1">Payments appear here after the admin confirms client payment for orders you completed.</p>
                 </CardContent>
               </Card>
             ) : (
@@ -395,8 +405,9 @@ export default function PartTimerAccount() {
             <p className="text-sm text-muted-foreground mb-4">Orders you completed (payment status shown).</p>
             {completedByMe.length === 0 ? (
               <Card>
-                <CardContent className="py-8 text-center text-muted-foreground text-sm">
-                  No completed orders yet.
+                <CardContent className="py-8 text-center text-muted-foreground">
+                  <History className="h-10 w-10 mx-auto mb-3 opacity-40" />
+                  <p>No completed orders yet.</p>
                 </CardContent>
               </Card>
             ) : (

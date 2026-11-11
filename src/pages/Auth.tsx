@@ -90,11 +90,13 @@ export default function Auth() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
-      <div className="flex flex-1 items-center justify-center py-12 px-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <div className="flex justify-center mb-2">
-              <BarChart3 className="h-10 w-10 text-primary" />
+      <div className="relative flex flex-1 items-center justify-center py-12 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" aria-hidden />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full bg-primary/10 blur-[110px]" aria-hidden />
+        <Card className="relative w-full max-w-md shadow-card">
+          <CardHeader className="text-center pt-8">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 mb-3">
+              <BarChart3 className="h-7 w-7 text-primary" />
             </div>
             <CardTitle>Welcome to BRAJ</CardTitle>
             <CardDescription>

@@ -8,7 +8,7 @@ import { Footer } from "@/components/Footer";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
-import { Download, Plus, Clock, Loader2, Lock, CreditCard, Star, Trash2 } from "lucide-react";
+import { Download, Plus, Clock, Loader2, Lock, CreditCard, Star, Trash2, ClipboardList } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -35,9 +35,9 @@ const GCASH_NUMBER = "09155090144";
 const GCASH_NAME = "Baltazar R. Abobo Jr.";
 
 const statusColors: Record<string, string> = {
-  pending: "bg-yellow-100 text-yellow-800 border-yellow-200",
-  in_progress: "bg-blue-100 text-blue-800 border-blue-200",
-  completed: "bg-green-100 text-green-800 border-green-200",
+  pending: "bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-950 dark:text-yellow-300 dark:border-yellow-800",
+  in_progress: "bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800",
+  completed: "bg-green-100 text-green-800 border-green-200 dark:bg-green-950 dark:text-green-300 dark:border-green-800",
 };
 
 const statusLabels: Record<string, string> = {
@@ -244,8 +244,16 @@ export default function Dashboard() {
       <Header />
       <main className="flex-1 py-8">
         <div className="container">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl font-bold">My Orders</h1>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                <ClipboardList className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold">My Orders</h1>
+                <p className="text-sm text-muted-foreground">Track orders, download files, and rate completed work.</p>
+              </div>
+            </div>
             <Button asChild>
               <a href="/order"><Plus className="h-4 w-4 mr-1" /> New Order</a>
             </Button>
